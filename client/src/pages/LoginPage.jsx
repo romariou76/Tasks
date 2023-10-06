@@ -33,13 +33,13 @@ export function LoginPage() {
         ))}
         <h1 className="text-2xl font-bold">Login</h1>
 
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="email">Email:</Label>
           <Input
             label="Write your email"
             type="email"
             name="email"
-            placeholder="youremail@domain.tld"
             {...register("email", { required: true })}
           />
           <p>{errors.email?.message}</p>
@@ -48,13 +48,13 @@ export function LoginPage() {
           <Input
             type="password"
             name="password"
-            placeholder="Write your password"
             {...register("password", { required: true, minLength: 6 })}
           />
           <p>{errors.password?.message}</p>
 
           <Button>Login</Button>
         </form>
+
 
         <p className="flex gap-x-2 justify-between">
           Don't have an account? <Link to="/register" className="text-sky-500">Sign up</Link>

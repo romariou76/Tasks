@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
-import { MONGODB_URI } from "./config.js";
 
 export const connectDB = async () => {
   try {
-    await mongoose.connect(MONGODB_URI);
-    console.log("MongoDB is connected");
+    await mongoose.connect("mongodb+srv://romario91546:12121212@cluster0.bfse5nd.mongodb.net/");
+    console.log("Conexion a la base de datos Existosa");
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 };

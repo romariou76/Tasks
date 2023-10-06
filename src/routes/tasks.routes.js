@@ -1,25 +1,13 @@
 import { Router } from "express";
-import {
-  createTask,
-  deleteTask,
-  getTask,
-  getTasks,
-  updateTask,
-} from "../controllers/tasks.controllers.js";
-import { auth } from "../middlewares/auth.middleware.js";
-import { validateSchema } from "../middlewares/validator.middleware.js";
-import { createTaskSchema } from "../schemas/task.schema.js";
+import { authRequired } from "../middlewares/validateToken.js";
+import { getTasks, getTask, createTask, deleteTask, updateTask } from "../controllers/task.controller.js";
+const router = Router()
 
-const router = Router();
+// router.get('/tasks', authRequired,(req, res) => res.send('tasks'))
+router.get('/tasks', authRequired, getTasks)
+router.get('/tasks/:id', authRequired, getTask)
+router.post('/tasks', authRequired, createTask)
+router.delete('/tasks/:id', authRequired, deleteTask)
+router.put('/tasks/:id', authRequired, updateTask)
 
-router.get("/tasks", auth, getTasks);
-
-router.post("/tasks", auth, validateSchema(createTaskSchema), createTask);
-
-router.get("/tasks/:id", auth, getTask);
-
-router.put("/tasks/:id", auth, updateTask);
-
-router.delete("/tasks/:id", auth, deleteTask);
-
-export default router;
+export default router
