@@ -7,7 +7,9 @@ import { registerSchema } from "../schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 function Register() {
-  const { signup, errors: registerErrors, isAuthenticated } = useAuth();
+
+  const { signup, isAuthenticated ,errors: registerErrors,   } = useAuth();
+  
   const {
     register,
     handleSubmit,
@@ -15,6 +17,7 @@ function Register() {
   } = useForm({
     resolver: zodResolver(registerSchema),
   });
+
   const navigate = useNavigate();
 
   const onSubmit = async (value) => {
@@ -29,7 +32,9 @@ function Register() {
     <div className="h-[calc(100vh-100px)] flex items-center justify-center">
       <Card>
         {registerErrors.map((error, i) => (
-          <Message message={error} key={i} />
+          <div className="bg-red-500 p-2 text-white" message={error} key={i}>
+            {error}
+          </div>
         ))}
         <h1 className="text-3xl font-bold">Register</h1>
         <form onSubmit={handleSubmit(onSubmit)}>

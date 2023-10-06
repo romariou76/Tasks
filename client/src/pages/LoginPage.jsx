@@ -7,6 +7,7 @@ import { Card, Message, Button, Input, Label } from "../components/ui";
 import { loginSchema } from "../schemas/auth";
 
 export function LoginPage() {
+  
   const {
     register,
     handleSubmit,
