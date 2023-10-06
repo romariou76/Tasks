@@ -31,8 +31,9 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await registerRequest(user);
       if (res.status === 200) {
-        setUser(res.data);
-        setIsAuthenticated(true);
+        // setUser(res.data);
+        alert("Registrado Correctamente papu")
+        window.location.href = '/login';
       }
     } catch (error) {
       console.log(error.response.data);
