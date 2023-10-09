@@ -11,7 +11,7 @@ const app = express()
 app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true // Habilitar credenciales
-}));
+}));-
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -20,4 +20,4 @@ app.use(cookieParser())
 app.use("/api", authRoutes)
 app.use("/api", taskRoutes)
 
-export default app;
+export default app;     
