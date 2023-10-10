@@ -18,7 +18,7 @@ export function NavBar() {
         {isAuthenticated ? (
           <>
             <li>
-               {user.username}
+               Bienvenido {user.username}
             </li>
             <li>
               <Button><Link to="/add-task">Agregar</Link></Button>

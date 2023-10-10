@@ -6,10 +6,14 @@ import { Button, Card, Input, Label } from "../components/ui";
 import { useTasks } from "../context/tasksContext";
 import { Textarea } from "../components/ui/Textarea";
 import { useForm } from "react-hook-form";
+import { Select, SelectItem } from "@nextui-org/react";
+import { useAuth } from "../context/authContext";
 dayjs.extend(utc);
 
 export function TaskFormPage() {
   const { createTask, getTask, updateTask } = useTasks();
+  const { user } = useAuth();
+ 
   const navigate = useNavigate();
   const params = useParams();
   const {
@@ -39,6 +43,7 @@ export function TaskFormPage() {
       // window.location.href = "/";
     }
   };
+  
 
   useEffect(() => {
     const loadTask = async () => {
@@ -46,6 +51,7 @@ export function TaskFormPage() {
         const task = await getTask(params.id);
         setValue("title", task.title);
         setValue("description", task.description);
+        setValue("responsable", task.responsable);
         setValue(
           "date",
           task.date ? dayjs(task.date).utc().format("YYYY-MM-DD") : ""
@@ -79,7 +85,17 @@ export function TaskFormPage() {
           placeholder="Description"
           {...register("description")}
         ></Textarea>
-
+        <Label htmlFor="Responsable">Responsable</Label>
+        <Select
+          type="text"
+          name="responsable"  
+          placeholder="responsable"
+          {...register("responsable")}
+          autoFocus
+        >
+        <SelectItem>{user.username}</SelectItem>
+          
+        </Select>
         <Label htmlFor="date">Date</Label>
         <Input type="date" name="date" {...register("date")} />
         <Button>Save</Button>

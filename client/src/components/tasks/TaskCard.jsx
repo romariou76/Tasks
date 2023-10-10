@@ -15,6 +15,7 @@ export function TaskCard({ task }) {
       </header>
       <p className="text-slate-300">{task.description}</p>
       {/* format date */}
+      <p className="text-slate-300">{task.responsable}</p>
       <p>
         {task.date &&
           new Date(task.date).toLocaleDateString("en-US", {
