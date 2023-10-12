@@ -10,6 +10,10 @@ const taskSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    estado:{
+      type:String,
+      required:true,
+    },
     responsable:{
       type: String,
       required: true,
@@ -17,6 +21,10 @@ const taskSchema = new mongoose.Schema(
     date: {
       type: Date,
       default: Date.now,
+    },
+    prioridad: {
+      type: String,
+      required:true,
     },
     user: {
       type: mongoose.Types.ObjectId,
