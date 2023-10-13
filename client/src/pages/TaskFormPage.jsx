@@ -11,6 +11,7 @@ dayjs.extend(utc);
 import { Select, SelectItem } from "@nextui-org/react";
 
 import mongoose from "mongoose";
+import useGetAllUsers from "../hooks/GetAllUser";
 
 
 export function TaskFormPage() {
@@ -45,7 +46,6 @@ export function TaskFormPage() {
     }
   };
 
-
   useEffect(() => {
     const loadTask = async () => {
       if (params.id) {
@@ -72,6 +72,16 @@ export function TaskFormPage() {
     {label:"Intermedia",value:"intermedia"},
     {label:"Alta",value:"alta"}
   ]
+
+  const { loading, users, error } = useGetAllUsers();
+
+  useEffect(() => {
+    if (!loading && users) {
+      console.log(users);
+    }
+  }, [loading, users]);
+
+
   return (
     <div className="h-[calc(100vh-100px)] flex items-center justify-center">
       <Card>
@@ -112,14 +122,19 @@ export function TaskFormPage() {
           </Select>
 
           <Label htmlFor="responsable">Responsable</Label>
-          <select name="responsable" ></select>
-
-
-
-
-
-
-
+        
+                {loading ? (
+              <p>Cargando...</p>
+            ) : users ? (
+              <select name="responsable">
+                {users.map(user => (
+                  <option key={user.id}>{user.username}</option>
+                ))}
+                </select>
+            ) : (
+              <p>No hay usuarios disponibles o tu internet cayo.</p>
+            )}
+         
           <Label htmlFor="prioridad">Prioridad</Label>
           
           <Select
