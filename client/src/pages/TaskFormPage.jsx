@@ -52,6 +52,9 @@ export function TaskFormPage() {
         const task = await getTask(params.id);
         setValue("title", task.title);
         setValue("description", task.description);
+        setValue("estado", task.estado);
+        setValue("responsable", task.responsable);
+        setValue("prioridad", task.prioridad);
         setValue(
           "date",
           task.date ? dayjs(task.date).utc().format("YYYY-MM-DD") : ""
@@ -64,7 +67,7 @@ export function TaskFormPage() {
 
   const Status = [
     { label: "Por hacer", value: "por hacer" },
-    { label: "En progreso", value: "en" },
+    { label: "En progreso", value: "en progreso" },
     { label: "Completado", value: "completado" }
   ]
   const Prioridad=[
@@ -112,7 +115,7 @@ export function TaskFormPage() {
             isRequired
             label="Seleccione el estado"
             className="max-w-xs"
-            {...register("responsable")}
+            {...register("estado")}
           >
             {Status.map((Status) => (
               <SelectItem className="text-black"  key={Status.value} value={Status.value}>
@@ -126,9 +129,9 @@ export function TaskFormPage() {
                 {loading ? (
               <p>Cargando...</p>
             ) : users ? (
-              <select name="responsable">
+              <select className="rounded-md w-full pr-3 pl-3 pt-3 pb-3 " name="responsable" {...register("responsable")}>
                 {users.map(user => (
-                  <option key={user.id}>{user.username}</option>
+                  <option className="text-black" key={user.id} >{user.username}</option>
                 ))}
                 </select>
             ) : (
@@ -142,6 +145,7 @@ export function TaskFormPage() {
             label="Seleccione la prioridad"
             className="max-w-xs"
             {...register("prioridad")}
+            
             
           >
             {Prioridad.map((Prioridad) => (
